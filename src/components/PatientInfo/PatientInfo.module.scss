@@ -1,0 +1,39 @@
+.patientInfo {
+  width: 100%;
+  border-collapse: collapse;
+
+  .infoHeader {
+    background-color: #5A55AE;
+    font-weight: 600;
+    font-size: 16px;
+    text-transform: uppercase;
+
+    >tr th{
+      padding: 10px 16px;
+    }
+  }
+
+  .infoBody {
+    background-color: #1A1C27;
+    >tr {
+      height: 56px;
+    }
+    >tr th {
+      font-weight: 400;
+      opacity: .48;
+    }
+
+    .bodyItemBold {
+      opacity: 1;
+      font-weight: 600;
+    }
+
+    .bodyItemRed {
+      opacity: 1;
+      background: #CD2C2C;
+      border-radius: 40px;
+      font-weight: 400;
+      padding: 8px 24px;
+    }
+  }
+}

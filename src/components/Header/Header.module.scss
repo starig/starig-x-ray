@@ -1,0 +1,32 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 24px;
+
+  .download {
+    .downloadButton {
+      border: 0;
+      background-color: #121116;
+      color: #FFF;
+      font-size: 20px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      transition: color .2s ease-in-out;
+
+      .buttonIcon {
+        margin-right: 11px;
+      }
+
+      &:hover {
+        cursor: pointer;
+        color: #5A55AE;
+      }
+    }
+  }
+
+
+}
