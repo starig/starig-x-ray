@@ -1,0 +1,30 @@
+.xrayPhoto {
+  padding: 40px;
+  background-color: #1A1C27;
+  display: grid;
+  justify-content: center;
+  grid-row-gap: 26px;
+
+  .xrayPhotoButtons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .xrayPhotoEditButtons {
+    display: flex;
+    gap: 16px;
+
+    .xrayIcon {
+      background-color: #232533;
+      border-radius: 50%;
+      padding: 18px;
+      transition: background-color .2s ease-in-out;
+
+      &:hover {
+        cursor: pointer;
+        background-color: #5A55AE;
+      }
+    }
+  }
+}
