@@ -1,101 +1,45 @@
-import React, {FC} from 'react';
-import Header from "../../components/Header/Header";
+import React, {useEffect} from 'react';
 import styles from './XrayPage.module.scss';
+import Header from "../../components/Header/Header";
 import PatientInfo from "../../components/PatientInfo/PatientInfo";
 import XrayPhoto from "../../components/XrayPhoto/XrayPhoto";
-import ProgressBar from "@ramonak/react-progress-bar";
-import {BiPencil} from "react-icons/bi";
-import {AiOutlineEye} from "react-icons/ai";
+import XrayResults from "../../components/XrayResults/XrayResults";
+import {useDispatch, useSelector} from "react-redux";
+import {AppDispatch, RootState} from "../../redux/store";
+import PatientInfoLoader from "../../components/Skeletons/PatientInfoLoader";
+import XrayResultsLoader from "../../components/Skeletons/XrayResultsLoader";
+import {fetchXrayData} from "../../redux/actions";
 
-const XrayPage: FC = () => (
-    <div>
-        <Header/>
-        <PatientInfo/>
-        <div className={styles.xrayContent}>
-            <XrayPhoto/>
-            <div className={styles.xrayResults}>
-                <h2>Preliminary results</h2>
-                <div className={styles.resultsPB}> {/*ProgressBar*/}
-                    <div className={styles.resultsPBHeader}>
-                        <h3>
-                            Abnormality
-                        </h3>
-                        <h3>75%</h3>
-                    </div>
-                    <ProgressBar completed={75}
-                                 className={styles.wrapper}
-                                 bgColor={'#CD2C2C'}
-                                 baseBgColor={'#2E303F'}
-                                 height={'10'}
-                                 labelSize={'0'}/>
-                </div>
-                <div className={styles.resultsPB}> {/*ProgressBar*/}
-                    <div className={styles.resultsPBHeader}>
-                        <h3>
-                            Pneumonial
-                        </h3>
-                        <h3>93%</h3>
-                    </div>
-                    <ProgressBar completed={93}
-                                 className={styles.wrapper}
-                                 bgColor={'#CD2C2C'}
-                                 baseBgColor={'#2E303F'}
-                                 height={'10'}
-                                 labelSize={'0'}/>
-                </div>
-                <div className={styles.resultsTable}>
-                    <h3>AI Statistics</h3>
-                    <table>
-                        <tr>
-                            <th className={styles.tableRowTitle}>Atelectasis</th>
-                            <th>70%</th>
-                        </tr>
-                        <tr>
-                            <th className={styles.tableRowTitle}>Atelectasis</th>
-                            <th>70%</th>
-                        </tr>
-                        <tr>
-                            <th className={styles.tableRowTitle}>Atelectasis</th>
-                            <th>70%</th>
-                        </tr>
-                        <tr>
-                            <th className={styles.tableRowTitle}>Atelectasis</th>
-                            <th>70%</th>
-                        </tr>
-                        <tr>
-                            <th className={styles.tableRowTitle}>Atelectasis</th>
-                            <th>70%</th>
-                        </tr>
-                        <tr>
-                            <th className={styles.tableRowTitle}>Atelectasis</th>
-                            <th>70%</th>
-                        </tr>
-                        <tr>
-                            <th className={styles.tableRowTitle}>Atelectasis</th>
-                            <th>70%</th>
-                        </tr>
-                        <tr>
-                            <th className={styles.tableRowTitle}>Atelectasis</th>
-                            <th>70%</th>
-                        </tr>
-                    </table>
-                </div>
-                <div className={styles.resultsButtons}>
-                    <button className={styles.resultsButton}>
-                        <BiPencil />
-                        Edit report
-                    </button>
-                    <button className={styles.resultsButton}>
-                        <AiOutlineEye />
-                        View report
-                    </button>
-                    <button className={styles.resultsButton}>
-                        Edit report
-                    </button>
-                </div>
+const XrayPage = () => {
+    const { status } = useSelector((state: RootState) => state.xray);
+    const dispatch = useDispatch<AppDispatch>();
+
+    const getXrayData = async () => {
+        try {
+            dispatch(fetchXrayData());
+        } catch (e) {
+            console.error(e)
+        }
+    }
+
+    useEffect(() => {
+        getXrayData();
+    }, [])
+
+    return (
+        <div>
+            <Header/>
+            {
+                status === 'loading' ? <PatientInfoLoader /> : <PatientInfo />
+            }
+            <div className={styles.xrayContent}>
+                <XrayPhoto/>
+                {
+                    status === 'loading' ? <XrayResultsLoader /> : <XrayResults />
+                }
             </div>
         </div>
-    </div>
-);
+    )
+};
 
 export default XrayPage;

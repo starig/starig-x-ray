@@ -1,0 +1,47 @@
+{
+  "is_favorite": false,
+  "first_name": "Lynn Pfannerstill",
+  "last_name": "Turcotte",
+  "gender": "Agender",
+  "age": 1,
+  "dob": "2022-05-08T09:58:07.087Z",
+  "dox": "2022-10-02T08:50:42.508Z",
+  "ab_prob": 7,
+  "status": "status 2",
+  "xray_img": "http://loremflickr.com/640/480",
+  "results": [
+    {
+      "name": "Atelectasis",
+      "value": "55"
+    },
+    {
+      "name": "Lung opacity",
+      "value": "34"
+    },
+    {
+      "name": "Lung nodule",
+      "value": "90"
+    },
+    {
+      "name": "Pleural effusion",
+      "value": "12"
+    },
+    {
+      "name": "Adhesion",
+      "value": "63"
+    },
+    {
+      "name": "Medical devices",
+      "value": "44"
+    },
+    {
+      "name": "Cardiomegaly",
+      "value": "75"
+    },
+    {
+      "name": "Scoliosis",
+      "value": "98"
+    }
+  ],
+  "id": "2"
+}

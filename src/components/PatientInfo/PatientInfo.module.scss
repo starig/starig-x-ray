@@ -2,6 +2,7 @@
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 40px;
+  padding: 0 16px;
 
   .infoHeader {
     background-color: #5A55AE;
@@ -9,8 +10,10 @@
     font-size: 16px;
     text-transform: uppercase;
 
+
     >tr th{
-      padding: 10px 16px;
+      padding: 10px 0;
+      text-align: left;
     }
   }
 
@@ -22,6 +25,7 @@
     >tr th {
       font-weight: 400;
       opacity: .48;
+      text-align: left;
     }
 
     .bodyItemBold {
@@ -34,7 +38,9 @@
       background: #CD2C2C;
       border-radius: 40px;
       font-weight: 400;
-      padding: 8px 24px;
+      padding: 8px 5px;
+      text-align: center;
+      width: 80%;
     }
   }
 }
