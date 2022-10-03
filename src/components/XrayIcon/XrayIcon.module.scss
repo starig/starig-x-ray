@@ -1,0 +1,20 @@
+.xrayIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #232533;
+  height: 56px;
+  width: 56px;
+  border: 0;
+  border-radius: 50%;
+  transition: background-color .2s ease-in-out;
+
+  &:hover {
+    cursor: pointer;
+    opacity: .7;
+  }
+}
+
+.xrayIconActive {
+  background-color: #5A55AE;
+}

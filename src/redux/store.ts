@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import xraySlice from "./slices/xray/xraySlice";
+import photoSlice from "./slices/photo/photoSlice";
 
 export const store = configureStore({
     reducer: {
         xray: xraySlice,
+        photo: photoSlice,
     },
 })
 

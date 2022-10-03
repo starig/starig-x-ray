@@ -11,6 +11,24 @@
     align-items: center;
   }
 
+  .arrowIcon {
+    background: none;
+    border: 0;
+    color: #FFF;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+
+    &:hover {
+      color: #5A55AE;
+      cursor: pointer;
+    }
+    &:disabled {
+      color: #606060;
+      cursor: auto;
+    }
+  }
+
   .xrayPhotoEditButtons {
     display: flex;
     gap: 16px;
