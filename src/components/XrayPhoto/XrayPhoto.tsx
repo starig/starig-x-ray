@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useEffect, useRef, useState} from 'react';
 import {AiOutlineLeft, AiOutlineRight} from "react-icons/ai";
 import styles from './XrayPhoto.module.scss';
 import ArrowIcon from './../../assets/icons/arrow.svg';
@@ -10,12 +10,27 @@ import {AppDispatch, RootState} from "../../redux/store";
 import XrayPhotoLoader from "../Skeletons/XrayPhotoLoader";
 import {decrement, increment} from "../../redux/slices/photo/photoSlice";
 import XrayIcon from "../XrayIcon/XrayIcon";
+import ContrastPopup from "../ContrastPopup/ContrastPopup";
+
+export type PopupClick = MouseEvent & {
+    path: Node[];
+}
+
 
 const XrayPhoto: FC = () => {
     const { status } = useSelector((state: RootState) => state.xray);
-    const { photos, currentPhotoId } = useSelector((state: RootState) => state.photo);
+    const { photos, currentPhotoId, contrastValue, brightnessValue, invertValue } = useSelector((state: RootState) => state.photo);
+
     const [currentPhoto, setCurrentPhoto] = useState<string>(photos[currentPhotoId].defaultUrl);
     const [isAi, setIsAi] = useState<boolean>(false);
+    const [contrastPopupStatus, setContrastPopupStatus] = useState<boolean>(false);
+    const [contrastPhotoValue, setContrastPhotoValue] = useState<string>(contrastValue);
+    const [brightnessPhotoValue, setBrightnessPhotoValue] = useState<string>(brightnessValue);
+
+    const ref = useRef<HTMLDivElement>(null);
+    const buttonRef = useRef<HTMLDivElement>(null);
+
+
     const dispatch = useDispatch<AppDispatch>();
 
     const nextPhoto = () => {
@@ -38,25 +53,65 @@ const XrayPhoto: FC = () => {
         }
     }, [currentPhotoId, isAi]);
 
+    useEffect(() => {
+        setContrastPhotoValue(contrastValue);
+    }, [contrastValue]);
+
+    useEffect(() => {
+        setBrightnessPhotoValue(brightnessValue);
+    }, [brightnessValue]);
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            const _event = event as PopupClick;
+
+            if ((ref.current && !_event.path.includes(ref.current))
+                && (buttonRef.current && !_event.path.includes(buttonRef.current))) {
+                setContrastPopupStatus(false);
+            }
+        }
+
+        document.body.addEventListener('click', handleClickOutside);
+
+        return () => document.body.removeEventListener('click', handleClickOutside);
+    }, []);
+
+
     return (
         <div className={styles.xrayPhoto}>
             <div className={styles.xrayPhotoButtons}>
                 <button className={styles.arrowIcon} onClick={prevPhoto} disabled={currentPhotoId === 0}>
-                    <AiOutlineLeft />
+                    <AiOutlineLeft/>
                 </button>
-                <div className={styles.xrayPhotoEditButtons}>
-                    <XrayIcon url={ArrowIcon} alt={'Arrow'} />
-                    <XrayIcon url={LungIcon} alt={'Lung'} isAi={isAi} handleAi={setIsAi}/>
-                    <XrayIcon url={RulerIcon} alt={'Ruler'} />
-                    <XrayIcon url={ContrastIcon} alt={'Contrast'} />
+                <div className={styles.xrayPhotoEditButtons} ref={buttonRef}>
+                    <XrayIcon url={ArrowIcon} alt={'Arrow'}/>
+                    <XrayIcon url={LungIcon} alt={'Lung'} status={isAi} handleStatus={setIsAi}/>
+                    <XrayIcon url={RulerIcon} alt={'Ruler'}/>
+                    <XrayIcon url={ContrastIcon} alt={'Contrast'}
+                              status={contrastPopupStatus} handleStatus={setContrastPopupStatus} />
                 </div>
-                <button className={styles.arrowIcon} onClick={nextPhoto} disabled={currentPhotoId === photos.length - 1}>
-                    <AiOutlineRight />
+                <button className={styles.arrowIcon} onClick={nextPhoto}
+                        disabled={currentPhotoId === photos.length - 1}>
+                    <AiOutlineRight/>
                 </button>
             </div>
             <div className={styles.xrayPhotoImage}>
+                <div ref={ref}>
+                    {
+                        contrastPopupStatus && <ContrastPopup setContrastPopupStatus={setContrastPopupStatus}
+                                                              contrastPopupStatus={contrastPopupStatus}/>
+                    }
+                </div>
                 {
-                    status === 'loading' ? <XrayPhotoLoader /> : <img src={currentPhoto} alt={'x-ray'} />
+                    status === 'loading' ? <XrayPhotoLoader/> : <img src={currentPhoto}
+                                                                     style={
+                                                                         {
+                                                                             filter: `contrast(${contrastPhotoValue}%) 
+                                                                             brightness(${brightnessPhotoValue}%) 
+                                                                             invert(${invertValue})`,
+                                                                         }
+                                                                     }
+                                                                     alt={'x-ray'}/>
                 }
             </div>
         </div>

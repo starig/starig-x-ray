@@ -1,4 +1,4 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import photo1 from './../../../assets/img/xrayImg.jpg';
 import photo1_ai from './../../../assets/img/xrayImg-ai.jpg';
 import photo2 from './../../../assets/img/xrayImg-2.jpg';
@@ -17,7 +17,10 @@ const initialState: PhotoSliceState = {
             "defaultUrl": photo2,
             "aiUrl": photo2_ai,
         },
-    ]
+    ],
+    contrastValue: '100',
+    brightnessValue: '100',
+    invertValue: '0',
 }
 
 export const photoSlice = createSlice({
@@ -29,10 +32,19 @@ export const photoSlice = createSlice({
         },
         decrement: (state) => {
             state.currentPhotoId--
-        }
+        },
+        setContrast: (state, action: PayloadAction<string>) => {
+            state.contrastValue = action.payload;
+        },
+        setBrightness: (state, action: PayloadAction<string>) => {
+            state.brightnessValue = action.payload
+        },
+        handleInvert: (state) => {
+            state.invertValue === '1' ? state.invertValue = '0' : state.invertValue = '1';
+        },
     }
 });
 
-export const { increment, decrement } = photoSlice.actions;
+export const { increment, decrement, setContrast, setBrightness, handleInvert } = photoSlice.actions;
 
 export default photoSlice.reducer;

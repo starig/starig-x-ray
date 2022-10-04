@@ -4,6 +4,9 @@ export type PhotosItem = {
 }
 
 export type PhotoSliceState = {
-    currentPhotoId: number,
-    photos: PhotosItem[]
+    currentPhotoId: number;
+    photos: PhotosItem[];
+    contrastValue: string;
+    brightnessValue: string;
+    invertValue: string;
 }

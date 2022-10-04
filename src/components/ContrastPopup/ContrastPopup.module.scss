@@ -1,0 +1,185 @@
+@keyframes showPopup {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.contrastPopup {
+  position: absolute;
+  width: 240px;
+  height: 264px;
+  background: rgba(29, 31, 46, 0.5);
+  backdrop-filter: blur(4px);
+  right: 0;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  animation-name: showPopup;
+  animation-duration: 1s;
+  z-index: 1;
+
+  .popupSlider {
+
+    .popupSliderTitle {
+      font-size: 18px;
+    }
+
+    input[type=range] {
+      -webkit-appearance: none;
+      margin: 10px 0;
+      width: 100%;
+    }
+    input[type=range]:focus {
+      outline: none;
+    }
+    input[type=range]::-webkit-slider-runnable-track {
+      width: 100%;
+      height: 2px;
+      cursor: pointer;
+      animate: 0.2s;
+      box-shadow: 1px 1px 1px #000000;
+      background: #BABABD;
+      border-radius: 0;
+      border: 0 solid #000000;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      box-shadow: 1px 1px 1px #000000;
+      border: 0 solid #000000;
+      height: 16px;
+      width: 16px;
+      border-radius: 50px;
+      background: #FFFFFF;
+      cursor: pointer;
+      -webkit-appearance: none;
+      margin-top: -7px;
+    }
+    input[type=range]:focus::-webkit-slider-runnable-track {
+      background: #BABABD;
+    }
+    input[type=range]::-moz-range-track {
+      width: 100%;
+      height: 2px;
+      cursor: pointer;
+      animate: 0.2s;
+      box-shadow: 1px 1px 1px #000000;
+      background: #BABABD;
+      border-radius: 0;
+      border: 0 solid #000000;
+    }
+    input[type=range]::-moz-range-thumb {
+      box-shadow: 1px 1px 1px #000000;
+      border: 0 solid #000000;
+      height: 16px;
+      width: 16px;
+      border-radius: 50px;
+      background: #FFFFFF;
+      cursor: pointer;
+    }
+    input[type=range]::-ms-track {
+      width: 100%;
+      height: 2px;
+      cursor: pointer;
+      animate: 0.2s;
+      background: transparent;
+      border-color: transparent;
+      color: transparent;
+    }
+    input[type=range]::-ms-fill-lower {
+      background: #BABABD;
+      border: 0 solid #000000;
+      border-radius: 0;
+      box-shadow: 1px 1px 1px #000000;
+    }
+    input[type=range]::-ms-fill-upper {
+      background: #BABABD;
+      border: 0 solid #000000;
+      border-radius: 0;
+      box-shadow: 1px 1px 1px #000000;
+    }
+    input[type=range]::-ms-thumb {
+      margin-top: 1px;
+      box-shadow: 1px 1px 1px #000000;
+      border: 0px solid #000000;
+      height: 16px;
+      width: 16px;
+      border-radius: 50px;
+      background: #FFFFFF;
+      cursor: pointer;
+    }
+    input[type=range]:focus::-ms-fill-lower {
+      background: #BABABD;
+    }
+    input[type=range]:focus::-ms-fill-upper {
+      background: #BABABD;
+    }
+
+
+    /* The switch - the box around the slider */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+    }
+
+    /* Hide default HTML checkbox */
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    /* The slider */
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+
+    input:checked + .slider {
+      background-color: #5A55AE;
+    }
+
+    input:focus + .slider {
+      box-shadow: 0 0 1px #5A55AE;
+    }
+
+    input:checked + .slider:before {
+      -webkit-transform: translateX(26px);
+      -ms-transform: translateX(26px);
+      transform: translateX(26px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+      border-radius: 34px;
+    }
+
+    .slider.round:before {
+      border-radius: 50%;
+    }
+
+  }
+}
