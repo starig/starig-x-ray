@@ -5,10 +5,19 @@
   justify-content: center;
   grid-row-gap: 26px;
 
-  .xrayPhotoImage {
+  .xrayPhotoWrapper {
     position: relative;
 
 
+    .xrayPhotoImage {
+      overflow: hidden;
+      max-height: 836px;
+      .imgTest {
+        width: 150%;
+        height: 150%;
+        transform: translateY(-200px);
+      }
+    }
   }
 
   .xrayPhotoButtons {

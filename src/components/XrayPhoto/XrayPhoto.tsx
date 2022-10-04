@@ -11,6 +11,7 @@ import XrayPhotoLoader from "../Skeletons/XrayPhotoLoader";
 import {decrement, increment} from "../../redux/slices/photo/photoSlice";
 import XrayIcon from "../XrayIcon/XrayIcon";
 import ContrastPopup from "../ContrastPopup/ContrastPopup";
+import ArrowPopup from "../ArrowPopup/ArrowPopup";
 
 export type PopupClick = MouseEvent & {
     path: Node[];
@@ -19,13 +20,24 @@ export type PopupClick = MouseEvent & {
 
 const XrayPhoto: FC = () => {
     const { status } = useSelector((state: RootState) => state.xray);
-    const { photos, currentPhotoId, contrastValue, brightnessValue, invertValue } = useSelector((state: RootState) => state.photo);
+    const {
+        photos,
+        currentPhotoId,
+        contrastValue,
+        brightnessValue,
+        invertValue,
+        photoSize
+    } = useSelector((state: RootState) => state.photo);
 
     const [currentPhoto, setCurrentPhoto] = useState<string>(photos[currentPhotoId].defaultUrl);
+
     const [isAi, setIsAi] = useState<boolean>(false);
+
     const [contrastPopupStatus, setContrastPopupStatus] = useState<boolean>(false);
     const [contrastPhotoValue, setContrastPhotoValue] = useState<string>(contrastValue);
     const [brightnessPhotoValue, setBrightnessPhotoValue] = useState<string>(brightnessValue);
+
+    const [arrowPopupStatus, setArrowPopupStatus] = useState<boolean>(false);
 
     const ref = useRef<HTMLDivElement>(null);
     const buttonRef = useRef<HTMLDivElement>(null);
@@ -84,34 +96,40 @@ const XrayPhoto: FC = () => {
                     <AiOutlineLeft/>
                 </button>
                 <div className={styles.xrayPhotoEditButtons} ref={buttonRef}>
-                    <XrayIcon url={ArrowIcon} alt={'Arrow'}/>
+                    <XrayIcon url={ArrowIcon} alt={'Arrow'} status={arrowPopupStatus} handleStatus={setArrowPopupStatus}/>
                     <XrayIcon url={LungIcon} alt={'Lung'} status={isAi} handleStatus={setIsAi}/>
                     <XrayIcon url={RulerIcon} alt={'Ruler'}/>
                     <XrayIcon url={ContrastIcon} alt={'Contrast'}
-                              status={contrastPopupStatus} handleStatus={setContrastPopupStatus} />
+                              status={contrastPopupStatus} handleStatus={setContrastPopupStatus}/>
                 </div>
                 <button className={styles.arrowIcon} onClick={nextPhoto}
                         disabled={currentPhotoId === photos.length - 1}>
                     <AiOutlineRight/>
                 </button>
             </div>
-            <div className={styles.xrayPhotoImage}>
-                <div ref={ref}>
-                    {
-                        contrastPopupStatus && <ContrastPopup setContrastPopupStatus={setContrastPopupStatus}
-                                                              contrastPopupStatus={contrastPopupStatus}/>
-                    }
-                </div>
+            <div className={styles.xrayPhotoWrapper}>
                 {
-                    status === 'loading' ? <XrayPhotoLoader/> : <img src={currentPhoto}
-                                                                     style={
-                                                                         {
-                                                                             filter: `contrast(${contrastPhotoValue}%) 
+                    contrastPopupStatus && <div ref={ref}>
+                        <ContrastPopup />
+                    </div>
+                }
+                {
+                    arrowPopupStatus && <ArrowPopup />
+                }
+                {
+                    status === 'loading' ? <XrayPhotoLoader/> : <div className={styles.xrayPhotoImage}>
+                        <img src={currentPhoto}
+                             style={
+                                 {
+                                     filter: `contrast(${contrastPhotoValue}%) 
                                                                              brightness(${brightnessPhotoValue}%) 
                                                                              invert(${invertValue})`,
-                                                                         }
-                                                                     }
-                                                                     alt={'x-ray'}/>
+                                     width: `${photoSize}%`,
+                                     height: `${photoSize}%`
+                                 }
+                             }
+                             alt={'x-ray'}/>
+                    </div>
                 }
             </div>
         </div>

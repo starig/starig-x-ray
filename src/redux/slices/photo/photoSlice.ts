@@ -21,6 +21,7 @@ const initialState: PhotoSliceState = {
     contrastValue: '100',
     brightnessValue: '100',
     invertValue: '0',
+    photoSize: '100',
 }
 
 export const photoSlice = createSlice({
@@ -42,9 +43,31 @@ export const photoSlice = createSlice({
         handleInvert: (state) => {
             state.invertValue === '1' ? state.invertValue = '0' : state.invertValue = '1';
         },
+        photoSizePlus: (state) => {
+            let sizeValue: number = Number(state.photoSize);
+            if (sizeValue < 200) {
+                sizeValue += 20;
+            }
+            state.photoSize = sizeValue.toString();
+        },
+        photoSizeMinus: (state) => {
+            let sizeValue: number = Number(state.photoSize);
+            if (sizeValue > 100) {
+                sizeValue -= 20;
+            }
+            state.photoSize = sizeValue.toString();
+        }
     }
 });
 
-export const { increment, decrement, setContrast, setBrightness, handleInvert } = photoSlice.actions;
+export const {
+    increment,
+    decrement,
+    setContrast,
+    setBrightness,
+    handleInvert,
+    photoSizePlus,
+    photoSizeMinus
+} = photoSlice.actions;
 
 export default photoSlice.reducer;

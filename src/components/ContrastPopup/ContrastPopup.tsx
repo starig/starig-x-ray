@@ -5,12 +5,7 @@ import {AppDispatch, RootState} from "../../redux/store";
 import {handleInvert, setBrightness, setContrast} from "../../redux/slices/photo/photoSlice";
 
 
-type ContrastPopupProps = {
-    setContrastPopupStatus: (value: boolean) => void;
-    contrastPopupStatus: boolean;
-}
-
-const ContrastPopup: FC<ContrastPopupProps> = ({}) => {
+const ContrastPopup: FC = () => {
 
     const {contrastValue, brightnessValue} = useSelector((state: RootState) => state.photo);
     const dispatch = useDispatch<AppDispatch>();
