@@ -11,7 +11,8 @@ import XrayPhotoLoader from "../Skeletons/XrayPhotoLoader";
 import {decrement, increment} from "../../redux/slices/photo/photoSlice";
 import XrayIcon from "../XrayIcon/XrayIcon";
 import ContrastPopup from "../ContrastPopup/ContrastPopup";
-import ReactPanZoom from 'react-image-pan-zoom-rotate';
+import ReactPanZoom from './../ArrowMenu/ArrowMenu';
+import Ruler from "../Ruler/Ruler";
 
 export type PopupClick = MouseEvent & {
     path: Node[];
@@ -37,6 +38,7 @@ const XrayPhoto: FC = () => {
     const [brightnessPhotoValue, setBrightnessPhotoValue] = useState<string>(brightnessValue);
 
     const [arrowPopupStatus, setArrowPopupStatus] = useState<boolean>(false);
+    const [rulerStatus, setRulerStatus] = useState<boolean>(false);
 
     const ref = useRef<HTMLDivElement>(null);
     const buttonRef = useRef<HTMLDivElement>(null);
@@ -100,7 +102,7 @@ const XrayPhoto: FC = () => {
                     <XrayIcon url={ArrowIcon} alt={'Arrow'} status={arrowPopupStatus}
                               handleStatus={setArrowPopupStatus}/>
                     <XrayIcon url={LungIcon} alt={'Lung'} status={isAi} handleStatus={setIsAi}/>
-                    <XrayIcon url={RulerIcon} alt={'Ruler'}/>
+                    <XrayIcon url={RulerIcon} alt={'Ruler'} status={rulerStatus} handleStatus={setRulerStatus}/>
                     <XrayIcon url={ContrastIcon} alt={'Contrast'}
                               status={contrastPopupStatus} handleStatus={setContrastPopupStatus}/>
                 </div>
@@ -119,17 +121,15 @@ const XrayPhoto: FC = () => {
                     status === 'loading' ? <XrayPhotoLoader/> : <div className={styles.xrayPhotoImage}
                                                                      ref={photoRef}>
                         {
-                            arrowPopupStatus ? <div style={
-                                    {
-                                        filter: `contrast(${contrastPhotoValue}%) 
-                                                                             brightness(${brightnessPhotoValue}%) 
-                                                                             invert(${invertValue})`
-                                    }
-                                }>
+                            rulerStatus && <Ruler />
+                        }
+                        {
+                            arrowPopupStatus ? <div>
                                     <ReactPanZoom image={currentPhoto} alt={'x-ray'}/>
                                 </div> :
                                 <img src={currentPhoto} alt={'x-ray'} style={
                                     {
+                                        maxWidth: '100%',
                                         filter: `contrast(${contrastPhotoValue}%) 
                                                                              brightness(${brightnessPhotoValue}%) 
                                                                              invert(${invertValue})`

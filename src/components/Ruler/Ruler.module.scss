@@ -1,0 +1,23 @@
+.wrapper {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .rulerSide {
+    height: 16px;
+    width: 4px;
+    background-color: #fff;
+  }
+  .rulerBody {
+    height: 4px;
+    width: 100px;
+    background-color: #fff;
+    cursor: move;
+  }
+
+  .widthValue {
+    z-index: 1;
+  }
+}

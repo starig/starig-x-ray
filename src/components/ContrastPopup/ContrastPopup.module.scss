@@ -13,14 +13,14 @@
   height: 264px;
   background: rgba(29, 31, 46, 0.5);
   backdrop-filter: blur(4px);
-  left: 0;
+  right: 0;
   padding: 24px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   animation-name: showPopup;
   animation-duration: 1s;
-  z-index: 1;
+  z-index: 3;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 
   .popupSlider {

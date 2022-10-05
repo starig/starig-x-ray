@@ -1,0 +1,45 @@
+.wrapper {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+
+  .buttonsWrapper {
+    position: absolute;
+    z-index: 2;
+    padding: 20px;
+
+    .buttons {
+      width: 48px;
+      .buttonsItem {
+        background-color: #1D1F2E;
+        transition: background-color .4s ease-in-out;
+
+        &:hover {
+          cursor: pointer;
+          background-color: rgba(29, 31, 46, 0.6);
+        }
+      }
+
+      .plus {
+        border-top: 1px solid rgba(255, 255, 255, .24);
+        border-bottom-right-radius: 24px;
+        border-bottom-left-radius: 24px;
+      }
+
+      .minus {
+        border-top-right-radius: 24px;
+        border-top-left-radius: 24px;
+      }
+
+      .disabled {
+        cursor: not-allowed;
+        background-color: #595959;
+
+        &:hover {
+          cursor: not-allowed;
+          background-color: #595959;
+        }
+      }
+    }
+  }
+}

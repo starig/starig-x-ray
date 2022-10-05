@@ -46,7 +46,7 @@ const XrayResults: FC = () => {
                 <h3>AI Statistics</h3>
                 <div className={styles.resultsWrapper}>
                     {
-                        results.map((item, id: number) => <div className={styles.resultsItem}>
+                        results.map((item, id: number) => <div className={styles.resultsItem} key={id}>
                             <div className={styles.itemText}>{item.name}</div>
                             <div className={styles.itemText}>{item.value}%</div>
                         </div>)
