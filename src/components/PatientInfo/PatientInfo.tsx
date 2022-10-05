@@ -33,45 +33,40 @@ const PatientInfo: FC = () => {
     const doxParsed = parseDate(dox);
 
     return (
-        <table className={styles.patientInfo}>
-            <thead className={styles.infoHeader}>
-            <tr>
-                <th>fav</th>
-                <th>patient id</th>
-                <th>firt name</th>
-                <th>last name</th>
-                <th>gender</th>
-                <th>age</th>
-                <th>dob</th>
-                <th>dox</th>
-                <th>ab.prob</th>
-                <th>status</th>
-            </tr>
-            </thead>
-            <tbody className={styles.infoBody}>
-            <tr>
-                <th className={styles.bodyItemBold}>
+        <div className={styles.wrapper}>
+            <div className={styles.header}>
+                <div className={styles.headerItem}>fav</div>
+                <div className={styles.headerItem}>patient id</div>
+                <div className={styles.headerItem}>first name</div>
+                <div className={styles.headerItem}>last name</div>
+                <div className={styles.headerItem}>gender</div>
+                <div className={styles.headerItem}>age</div>
+                <div className={styles.headerItem}>dob</div>
+                <div className={styles.headerItem}>dox</div>
+                <div className={styles.headerItem}>ab.prob</div>
+                <div className={styles.headerItem}>status</div>
+            </div>
+            <div className={styles.body}>
+                <div className={styles.bodyFav}>
                     {
-                        is_favorite ?<AiFillStar size={24} color={'#EAB632'}/> : <AiOutlineStar size={24}/>
+                        is_favorite ? <AiFillStar /> : <AiOutlineStar />
                     }
-
-                </th>
-                <th>{ id }</th>
-                <th className={styles.bodyItemBold}>{ first_name }</th>
-                <th className={styles.bodyItemBold}>{ last_name }</th>
-                <th>{ gender }</th>
-                <th>{ age }</th>
-                <th>{ dobParsed }</th>
-                <th>{ doxParsed }</th>
-                <th className={styles.bodyItemBold}>
-                    <div className={styles.bodyItemRed}>
-                        Abnormality: { ab_prob }%
+                </div>
+                <div>{id}</div>
+                <div className={styles.bodyBoldItem}>{first_name}</div>
+                <div className={styles.bodyBoldItem}>{last_name}</div>
+                <div>{gender}</div>
+                <div>{age}</div>
+                <div>{dobParsed}</div>
+                <div>{doxParsed}</div>
+                <div className={styles.bodyBoldItem}>
+                    <div className={styles.abProb}>
+                        Abnormality: {ab_prob}%
                     </div>
-                </th>
-                <th>{ status }</th>
-            </tr>
-            </tbody>
-        </table>
+                </div>
+                <div>{status}</div>
+            </div>
+        </div>
     )
 }
 

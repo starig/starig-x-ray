@@ -11,6 +11,7 @@ import XrayResultsLoader from "../../components/Skeletons/XrayResultsLoader";
 import {fetchXrayData} from "../../redux/actions";
 
 const XrayPage = () => {
+
     const { status } = useSelector((state: RootState) => state.xray);
     const dispatch = useDispatch<AppDispatch>();
 

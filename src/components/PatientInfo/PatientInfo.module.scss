@@ -1,46 +1,42 @@
-.patientInfo {
+.wrapper {
+  display: grid;
+  grid-template-rows: 40px 56px;
   width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 40px;
-  padding: 0 16px;
+  margin-bottom: 30px;
 
-  .infoHeader {
+  .header {
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr 2fr 2fr 1fr 2fr 2fr 4fr 2fr;
     background-color: #5A55AE;
-    font-weight: 600;
-    font-size: 16px;
     text-transform: uppercase;
-
-
-    >tr th{
-      padding: 10px 0;
-      text-align: left;
-    }
+    font-weight: 600;
+    align-items: center;
+    padding: 10px 16px;
   }
 
-  .infoBody {
+  .body {
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr 2fr 2fr 1fr 2fr 2fr 4fr 2fr;
+    padding: 0 16px;
+    align-items: center;
     background-color: #1A1C27;
-    >tr {
-      height: 56px;
-    }
-    >tr th {
-      font-weight: 400;
-      opacity: .48;
-      text-align: left;
+    font-size: 18px;
+    color: rgba(255, 255, 255, .48);
+
+    .bodyFav {
+      color: #EAB632;
     }
 
-    .bodyItemBold {
-      opacity: 1;
-      font-weight: 600;
+    .bodyBoldItem {
+      color: #FFF;
     }
 
-    .bodyItemRed {
-      opacity: 1;
-      background: #CD2C2C;
+    .abProb {
+      background-color: #CD2C2C;
       border-radius: 40px;
-      font-weight: 400;
-      padding: 8px 5px;
-      text-align: center;
+      padding: 8px 14px;
       width: 80%;
+      text-align: left;
     }
   }
 }

@@ -19,6 +19,27 @@
     }
   }
 
+  .resultsWrapper {
+    display: grid;
+
+    .resultsItem {
+      display: grid;
+      grid-template-columns: 4fr 1fr;
+      padding: 16px 20px;
+
+      .itemText {
+        font-size: 16px;
+        font-weight: 600;
+        color: #9B9DA8;
+        letter-spacing: -0.02em;
+      }
+    }
+
+    .resultsItem:nth-child(even) {
+      background-color: #212332;
+    }
+  }
+
   .resultsTable {
     margin-bottom: 32px;
     >h3 {
