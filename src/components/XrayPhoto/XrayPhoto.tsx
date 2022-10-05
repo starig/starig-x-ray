@@ -11,7 +11,7 @@ import XrayPhotoLoader from "../Skeletons/XrayPhotoLoader";
 import {decrement, increment} from "../../redux/slices/photo/photoSlice";
 import XrayIcon from "../XrayIcon/XrayIcon";
 import ContrastPopup from "../ContrastPopup/ContrastPopup";
-import ArrowPopup from "../ArrowPopup/ArrowPopup";
+import ReactPanZoom from 'react-image-pan-zoom-rotate';
 
 export type PopupClick = MouseEvent & {
     path: Node[];
@@ -19,14 +19,13 @@ export type PopupClick = MouseEvent & {
 
 
 const XrayPhoto: FC = () => {
-    const { status } = useSelector((state: RootState) => state.xray);
+    const {status} = useSelector((state: RootState) => state.xray);
     const {
         photos,
         currentPhotoId,
         contrastValue,
         brightnessValue,
-        invertValue,
-        photoSize
+        invertValue
     } = useSelector((state: RootState) => state.photo);
 
     const [currentPhoto, setCurrentPhoto] = useState<string>(photos[currentPhotoId].defaultUrl);
@@ -41,9 +40,10 @@ const XrayPhoto: FC = () => {
 
     const ref = useRef<HTMLDivElement>(null);
     const buttonRef = useRef<HTMLDivElement>(null);
-
+    const photoRef = useRef<HTMLDivElement>(null);
 
     const dispatch = useDispatch<AppDispatch>();
+
 
     const nextPhoto = () => {
         if (currentPhotoId !== photos.length - 1) {
@@ -73,6 +73,8 @@ const XrayPhoto: FC = () => {
         setBrightnessPhotoValue(brightnessValue);
     }, [brightnessValue]);
 
+    //Outside click watcher
+
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             const _event = event as PopupClick;
@@ -88,7 +90,6 @@ const XrayPhoto: FC = () => {
         return () => document.body.removeEventListener('click', handleClickOutside);
     }, []);
 
-
     return (
         <div className={styles.xrayPhoto}>
             <div className={styles.xrayPhotoButtons}>
@@ -96,7 +97,8 @@ const XrayPhoto: FC = () => {
                     <AiOutlineLeft/>
                 </button>
                 <div className={styles.xrayPhotoEditButtons} ref={buttonRef}>
-                    <XrayIcon url={ArrowIcon} alt={'Arrow'} status={arrowPopupStatus} handleStatus={setArrowPopupStatus}/>
+                    <XrayIcon url={ArrowIcon} alt={'Arrow'} status={arrowPopupStatus}
+                              handleStatus={setArrowPopupStatus}/>
                     <XrayIcon url={LungIcon} alt={'Lung'} status={isAi} handleStatus={setIsAi}/>
                     <XrayIcon url={RulerIcon} alt={'Ruler'}/>
                     <XrayIcon url={ContrastIcon} alt={'Contrast'}
@@ -110,25 +112,30 @@ const XrayPhoto: FC = () => {
             <div className={styles.xrayPhotoWrapper}>
                 {
                     contrastPopupStatus && <div ref={ref}>
-                        <ContrastPopup />
+                        <ContrastPopup/>
                     </div>
                 }
                 {
-                    arrowPopupStatus && <ArrowPopup />
-                }
-                {
-                    status === 'loading' ? <XrayPhotoLoader/> : <div className={styles.xrayPhotoImage}>
-                        <img src={currentPhoto}
-                             style={
-                                 {
-                                     filter: `contrast(${contrastPhotoValue}%) 
+                    status === 'loading' ? <XrayPhotoLoader/> : <div className={styles.xrayPhotoImage}
+                                                                     ref={photoRef}>
+                        {
+                            arrowPopupStatus ? <div style={
+                                    {
+                                        filter: `contrast(${contrastPhotoValue}%) 
                                                                              brightness(${brightnessPhotoValue}%) 
-                                                                             invert(${invertValue})`,
-                                     width: `${photoSize}%`,
-                                     height: `${photoSize}%`
-                                 }
-                             }
-                             alt={'x-ray'}/>
+                                                                             invert(${invertValue})`
+                                    }
+                                }>
+                                    <ReactPanZoom image={currentPhoto} alt={'x-ray'}/>
+                                </div> :
+                                <img src={currentPhoto} alt={'x-ray'} style={
+                                    {
+                                        filter: `contrast(${contrastPhotoValue}%) 
+                                                                             brightness(${brightnessPhotoValue}%) 
+                                                                             invert(${invertValue})`
+                                    }
+                                }/>
+                        }
                     </div>
                 }
             </div>

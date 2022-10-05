@@ -2,9 +2,6 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {fetchXrayData} from "../../actions";
 import {Status, XrayDataItem, XrayDataState} from "./types";
 
-
-
-
 const initialState: XrayDataState = {
     data: [],
     status: Status.LOADING,
@@ -28,6 +25,5 @@ export const xraySlice = createSlice({
         })
     }
 })
-
 
 export default xraySlice.reducer

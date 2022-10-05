@@ -9,5 +9,4 @@ export type PhotoSliceState = {
     contrastValue: string;
     brightnessValue: string;
     invertValue: string;
-    photoSize: string;
 }
