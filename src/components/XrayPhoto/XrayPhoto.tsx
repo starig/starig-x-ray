@@ -11,8 +11,8 @@ import XrayPhotoLoader from "../Skeletons/XrayPhotoLoader";
 import {decrement, increment} from "../../redux/slices/photo/photoSlice";
 import XrayIcon from "../XrayIcon/XrayIcon";
 import ContrastPopup from "../ContrastPopup/ContrastPopup";
-import ReactPanZoom from './../ArrowMenu/ArrowMenu';
 import Ruler from "../Ruler/Ruler";
+import PanImage from "../PanImage/PanImage";
 
 export type PopupClick = MouseEvent & {
     path: Node[];
@@ -124,9 +124,10 @@ const XrayPhoto: FC = () => {
                             rulerStatus && <Ruler />
                         }
                         {
-                            arrowPopupStatus ? <div>
-                                    <ReactPanZoom image={currentPhoto} alt={'x-ray'}/>
-                                </div> :
+                            arrowPopupStatus ? <PanImage imgSrc={currentPhoto}
+                                                         brightness={brightnessValue}
+                                                         contrast={contrastValue}
+                                                         invert={invertValue}/>:
                                 <img src={currentPhoto} alt={'x-ray'} style={
                                     {
                                         maxWidth: '100%',
