@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {FC, useEffect} from 'react';
 import styles from './XrayPage.module.scss';
 import Header from "../../components/Header/Header";
 import PatientInfo from "../../components/PatientInfo/PatientInfo";
@@ -10,7 +10,7 @@ import PatientInfoLoader from "../../components/Skeletons/PatientInfoLoader";
 import XrayResultsLoader from "../../components/Skeletons/XrayResultsLoader";
 import {fetchXrayData} from "../../redux/actions";
 
-const XrayPage = () => {
+const XrayPage: FC = () => {
 
     const { status } = useSelector((state: RootState) => state.xray);
     const dispatch = useDispatch<AppDispatch>();

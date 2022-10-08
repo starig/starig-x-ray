@@ -8,7 +8,7 @@ const Ruler: FC = () => {
     const [left, setLeft] = useState<number>(200);
     const [top, setTop] = useState<number>(200);
     const [width, setWidth] = useState<number>(100);
-    const [height, setHeight] = useState<number>(4)
+    const [height, setHeight] = useState<number>(4);
 
 
     const handleRotate = (rotateAngle: number) => {
@@ -49,11 +49,9 @@ const Ruler: FC = () => {
             <div style={
                 {
                     position: 'absolute',
-                    left: left + ((width / 100) * 2),
                     top: top,
-                    zIndex: 5,
+                    left: left,
                     color: '#fff',
-                    fontWeight: 700,
                     fontSize: 25,
                 }
             }>

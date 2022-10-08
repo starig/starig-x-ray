@@ -1,0 +1,141 @@
+ .wrapper {
+   width: 100%;
+   position: absolute;
+   z-index: 6;
+   display: grid;
+   justify-content: center;
+   align-content: center;
+   .editReport {
+     background-color: #fff;
+     width: 640px;
+     height: 530px;
+     padding: 40px 40px 20px;
+     display: grid;
+     grid-row-gap: 24px;
+
+     .header {
+       background-color: #CFCFCF;
+       border-radius: 16px;
+       color: #1d1f2e;
+       display: flex;
+       padding: 8px 24px;
+       justify-content: space-between;
+
+       .logo {
+         display: flex;
+         align-items: center;
+         justify-content: space-between;
+         width: 217px;
+         font-size: 16px;
+         font-weight: 600;
+
+         .logoArrow {
+           border: 0;
+           background: none;
+           display: flex;
+           align-items: center;
+           height: 100%;
+
+           &:hover {
+             cursor: pointer;
+           }
+         }
+
+         .templateButton {
+           background: none;
+           border: 0;
+           font-size: 16px;
+           font-weight: 600;
+
+           &:hover {
+             cursor: pointer;
+             color: #233267;
+           }
+         }
+       }
+
+       .headerStatus {
+         display: flex;
+         align-items: center;
+       }
+     }
+
+     .body {
+       height: 316px;
+       background-color: #CFCFCF;
+       border-radius: 16px;
+       padding: 24px;
+     }
+
+     .footer {
+       color: #292D32;
+       display: flex;
+       justify-content: space-between;
+
+       .reportInfo {
+         .approvedBy {
+           font-weight: 600;
+         }
+       }
+       .reportButtons {
+         width: 275px;
+         display: flex;
+         justify-content: space-between;
+
+         .gradientBox {
+           display: grid;
+           height: 54px;
+           margin-bottom: 16px;
+
+           position: relative;
+           box-sizing: border-box;
+
+           $border: 2px;
+           color: #FFF;
+           background-clip: padding-box; /* !importanté */
+           border: solid $border transparent; /* !importanté */
+           border-radius: 40px;
+
+           &:before {
+             content: '';
+             position: absolute;
+             top: 0; right: 0; bottom: 0; left: 0;
+             margin: -$border; /* !importanté */
+             border-radius: inherit; /* !importanté */
+             background: linear-gradient(222.12deg, #3F51B1 16.72%, #5A55AE 28.34%,
+                     #7B5FAC 40.43%, #8F6AAE 52.53%, #A86AA4 64.63%, #CC6B8E 75.62%, #F7C978 86.26%);
+           }
+         }
+
+
+         .reportButton {
+           z-index: 1;
+           border-radius: 40px;
+           border: 0;
+           font-weight: 700;
+           font-family: "Averta", serif;
+           font-size: 18px;
+           background-color: #fff;
+           color: #5A55AE;
+           transition: color .4s ease-in-out, background .4s ease-in-out;
+
+           &:hover {
+             cursor: pointer;
+             background: linear-gradient(222.12deg, #3F51B1 16.72%, #5A55AE 28.34%,
+                     #7B5FAC 40.43%, #8F6AAE 52.53%, #A86AA4 64.63%, #CC6B8E 75.62%, #F7C978 86.26%);
+             color: #FFF;
+           }
+         }
+
+         .editButton {
+           width: 112px;
+         }
+
+         .approveButton {
+           width: 147px;
+         }
+       }
+     }
+
+   }
+ }

@@ -8,13 +8,13 @@ import ContrastIcon from './../../assets/icons/contrast.svg';
 import {useDispatch, useSelector} from "react-redux";
 import {AppDispatch, RootState} from "../../redux/store";
 import XrayPhotoLoader from "../Skeletons/XrayPhotoLoader";
-import {decrement, increment} from "../../redux/slices/photo/photoSlice";
+import {nextPhoto, prevPhoto} from "../../redux/slices/photo/photoSlice";
 import XrayIcon from "../XrayIcon/XrayIcon";
 import ContrastPopup from "../ContrastPopup/ContrastPopup";
 import Ruler from "../Ruler/Ruler";
 import PanImage from "../PanImage/PanImage";
 
-export type PopupClick = MouseEvent & {
+type PopupClick = MouseEvent & {
     path: Node[];
 }
 
@@ -34,28 +34,25 @@ const XrayPhoto: FC = () => {
     const [isAi, setIsAi] = useState<boolean>(false);
 
     const [contrastPopupStatus, setContrastPopupStatus] = useState<boolean>(false);
-    const [contrastPhotoValue, setContrastPhotoValue] = useState<string>(contrastValue);
-    const [brightnessPhotoValue, setBrightnessPhotoValue] = useState<string>(brightnessValue);
 
     const [arrowPopupStatus, setArrowPopupStatus] = useState<boolean>(false);
     const [rulerStatus, setRulerStatus] = useState<boolean>(false);
 
-    const ref = useRef<HTMLDivElement>(null);
+    const wrapperRef = useRef<HTMLDivElement>(null);
     const buttonRef = useRef<HTMLDivElement>(null);
     const photoRef = useRef<HTMLDivElement>(null);
 
     const dispatch = useDispatch<AppDispatch>();
 
-
-    const nextPhoto = () => {
+    const changePhotoPlus = () => {
         if (currentPhotoId !== photos.length - 1) {
-            dispatch(increment());
+            dispatch(nextPhoto());
         }
     }
 
-    const prevPhoto = () => {
+    const changePhotoMinus = () => {
         if (currentPhotoId >= 0) {
-            dispatch(decrement());
+            dispatch(prevPhoto());
         }
     }
 
@@ -67,21 +64,13 @@ const XrayPhoto: FC = () => {
         }
     }, [currentPhotoId, isAi]);
 
-    useEffect(() => {
-        setContrastPhotoValue(contrastValue);
-    }, [contrastValue]);
-
-    useEffect(() => {
-        setBrightnessPhotoValue(brightnessValue);
-    }, [brightnessValue]);
-
     //Outside click watcher
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             const _event = event as PopupClick;
 
-            if ((ref.current && !_event.path.includes(ref.current))
+            if ((wrapperRef.current && !_event.path.includes(wrapperRef.current))
                 && (buttonRef.current && !_event.path.includes(buttonRef.current))) {
                 setContrastPopupStatus(false);
             }
@@ -95,7 +84,7 @@ const XrayPhoto: FC = () => {
     return (
         <div className={styles.xrayPhoto}>
             <div className={styles.xrayPhotoButtons}>
-                <button className={styles.arrowIcon} onClick={prevPhoto} disabled={currentPhotoId === 0}>
+                <button className={styles.arrowIcon} onClick={changePhotoMinus} disabled={currentPhotoId === 0}>
                     <AiOutlineLeft/>
                 </button>
                 <div className={styles.xrayPhotoEditButtons} ref={buttonRef}>
@@ -106,14 +95,14 @@ const XrayPhoto: FC = () => {
                     <XrayIcon url={ContrastIcon} alt={'Contrast'}
                               status={contrastPopupStatus} handleStatus={setContrastPopupStatus}/>
                 </div>
-                <button className={styles.arrowIcon} onClick={nextPhoto}
+                <button className={styles.arrowIcon} onClick={changePhotoPlus}
                         disabled={currentPhotoId === photos.length - 1}>
                     <AiOutlineRight/>
                 </button>
             </div>
             <div className={styles.xrayPhotoWrapper}>
                 {
-                    contrastPopupStatus && <div ref={ref}>
+                    contrastPopupStatus && <div ref={wrapperRef}>
                         <ContrastPopup/>
                     </div>
                 }
@@ -131,8 +120,8 @@ const XrayPhoto: FC = () => {
                                 <img src={currentPhoto} alt={'x-ray'} style={
                                     {
                                         maxWidth: '100%',
-                                        filter: `contrast(${contrastPhotoValue}%) 
-                                                                             brightness(${brightnessPhotoValue}%) 
+                                        filter: `contrast(${contrastValue}%) 
+                                                                             brightness(${brightnessValue}%) 
                                                                              invert(${invertValue})`
                                     }
                                 }/>

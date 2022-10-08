@@ -69,7 +69,9 @@
   }
 
   .resultsButtons {
-    display: grid;
+    display: flex;
+    flex-direction: column;
+
 
     .gradientBox {
       display: grid;
@@ -96,6 +98,7 @@
                 #7B5FAC 40.43%, #8F6AAE 52.53%, #A86AA4 64.63%, #CC6B8E 75.62%, #F7C978 86.26%);
       }
     }
+
 
     .resultsButton {
       display: flex;

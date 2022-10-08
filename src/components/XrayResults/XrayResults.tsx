@@ -52,16 +52,6 @@ const XrayResults: FC = () => {
                         </div>)
                     }
                 </div>
-                {/*<table>
-                    <tbody>
-                    {
-                        results.map((item, id: number) => <tr key={id}>
-                            <th className={styles.tableRowTitle}>{ item.name }</th>
-                            <th>{ item.value }%</th>
-                        </tr>)
-                    }
-                    </tbody>
-                </table>*/}
             </div>
             <div className={styles.resultsButtons}>
                 <div className={styles.gradientBox}>
@@ -78,7 +68,7 @@ const XrayResults: FC = () => {
                 </div>
                 <div className={styles.gradientBox}>
                     <button className={styles.resultsButton}>
-                        Edit report
+                        Print report
                     </button>
                 </div>
             </div>

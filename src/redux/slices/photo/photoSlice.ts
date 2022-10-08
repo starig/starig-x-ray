@@ -27,10 +27,10 @@ export const photoSlice = createSlice({
     name: 'photo',
     initialState,
     reducers: {
-        increment: (state) => {
+        nextPhoto: (state) => {
             state.currentPhotoId++;
         },
-        decrement: (state) => {
+        prevPhoto: (state) => {
             state.currentPhotoId--
         },
         setContrast: (state, action: PayloadAction<string>) => {
@@ -46,8 +46,8 @@ export const photoSlice = createSlice({
 });
 
 export const {
-    increment,
-    decrement,
+    nextPhoto,
+    prevPhoto,
     setContrast,
     setBrightness,
     handleInvert,
