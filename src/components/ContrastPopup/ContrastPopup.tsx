@@ -7,9 +7,10 @@ import {handleInvert, setBrightness, setContrast} from "../../redux/slices/photo
 
 const ContrastPopup: FC = () => {
 
-    const {contrastValue, brightnessValue} = useSelector((state: RootState) => state.photo);
+    const {contrastValue, brightnessValue, invertValue} = useSelector((state: RootState) => state.photo);
     const dispatch = useDispatch<AppDispatch>();
-    const [invertStatus, setInvertStatus] = useState<boolean>(false);
+    const [invertStatus, setInvertStatus] = useState<boolean>(invertValue !== '0');
+
 
     const invertPhoto = () => {
         dispatch(handleInvert());

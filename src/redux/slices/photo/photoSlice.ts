@@ -31,13 +31,13 @@ export const photoSlice = createSlice({
             state.currentPhotoId++;
         },
         prevPhoto: (state) => {
-            state.currentPhotoId--
+            state.currentPhotoId--;
         },
         setContrast: (state, action: PayloadAction<string>) => {
             state.contrastValue = action.payload;
         },
         setBrightness: (state, action: PayloadAction<string>) => {
-            state.brightnessValue = action.payload
+            state.brightnessValue = action.payload;
         },
         handleInvert: (state) => {
             state.invertValue === '1' ? state.invertValue = '0' : state.invertValue = '1';
