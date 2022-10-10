@@ -13,6 +13,7 @@ import XrayIcon from "../XrayIcon/XrayIcon";
 import ContrastPopup from "../ContrastPopup/ContrastPopup";
 import Ruler from "../Ruler/Ruler";
 import PanImage from "../PanImage/PanImage";
+import RulerTest from "../rulerTest/RulerTest";
 
 type PopupClick = MouseEvent & {
     path: Node[];
@@ -110,7 +111,7 @@ const XrayPhoto: FC = () => {
                     status === 'loading' ? <XrayPhotoLoader/> : <div className={styles.xrayPhotoImage}
                                                                      ref={photoRef}>
                         {
-                            rulerStatus && <Ruler />
+                            rulerStatus && <RulerTest />
                         }
                         {
                             arrowPopupStatus ? <PanImage imgSrc={currentPhoto}

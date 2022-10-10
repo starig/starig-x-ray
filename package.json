@@ -53,6 +53,7 @@
     ]
   },
   "devDependencies": {
+    "@types/fabric": "^4.5.12",
     "@types/styled-components": "^5.1.26"
   }
 }

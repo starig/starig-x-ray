@@ -7,7 +7,6 @@ import {FcCancel, FcOk} from "react-icons/fc";
 
 const EditReport: FC = () => {
 
-
     return (
         <div className={styles.wrapper}>
             <div className={styles.editReport}>
