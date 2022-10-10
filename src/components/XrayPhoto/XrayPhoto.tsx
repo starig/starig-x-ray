@@ -92,7 +92,13 @@ const XrayPhoto: FC = () => {
                     <XrayIcon url={ArrowIcon} alt={'Arrow'} status={arrowPopupStatus}
                               handleStatus={setArrowPopupStatus}/>
                     <XrayIcon url={LungIcon} alt={'Lung'} status={isAi} handleStatus={setIsAi}/>
-                    <XrayIcon url={RulerIcon} alt={'Ruler'} status={rulerStatus} handleStatus={setRulerStatus}/>
+                    <div onClick={() => {
+                        if (!rulerStatus) {
+                            window.scroll(0, 260)
+                        }
+                    }}>
+                        <XrayIcon url={RulerIcon} alt={'Ruler'} status={rulerStatus} handleStatus={setRulerStatus}/>
+                    </div>
                     <XrayIcon url={ContrastIcon} alt={'Contrast'}
                               status={contrastPopupStatus} handleStatus={setContrastPopupStatus}/>
                 </div>

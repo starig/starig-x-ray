@@ -20,8 +20,13 @@ const RulerTest = () => {
     const [length, setLength] = useState(len);
 
     let {x, y} = useMousePosition();
-    x -= 155
-    y -= 165
+    y -= 95
+    if (window.innerWidth === 1920) {
+        x -= 450
+    } else if (window.innerWidth === 1536) {
+        x -= 266
+    }
+
 
     const setPoint = ({x, y}: points) => {
         if (!rulerPoint1 || !rulerPoint2) {
@@ -44,7 +49,6 @@ const RulerTest = () => {
     }
 
     useEffect(() => {
-
         if (rulerPoint1 && !rulerPoint2) {
             if (x >= from.x) {
                 setTo({x, y});
@@ -72,14 +76,13 @@ const RulerTest = () => {
 
 
     return (
-        <div className={styles.wrapper} onClick={() => setPoint({x, y})}>
+        <div className={`${styles.wrapper} RulerWrapper`} onClick={() => setPoint({x, y})}>
             <div style={{
                 position: 'absolute',
                 transform: `translate(${from.x - .5 * len * (1 - Math.cos(angle))}px, ${from.y + .5 * len * Math.sin(angle)}px) rotate(${angle}rad)`,
                 width: `${length}px`,
                 height: `${2}px`,
                 borderBottom: '2px solid white',
-                zIndex: 5,
                 display: 'grid'
             }}>
                 <div className={styles.left}>
