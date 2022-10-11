@@ -1,23 +1,21 @@
 .wrapper {
   position: absolute;
-  z-index: 2;
-  display: grid;
-  justify-content: space-between;
-  align-items: center;
+  width: 100%;
+  height: 100%;
+  z-index: 4;
 
-  .rulerSide {
-    height: 16px;
-    width: 4px;
-    background-color: #fff;
-  }
-  .rulerBody {
-    height: 4px;
-    width: 100px;
-    background-color: #fff;
-    cursor: move;
+  .cm {
+    justify-self: center;
+    margin: -28px 0;
   }
 
-  .widthValue {
-    z-index: 1;
+  .left {
+    justify-self: start;
+    margin: -6px -6px;
+  }
+
+  .right {
+    justify-self: end;
+    margin: -15px -5px;
   }
 }

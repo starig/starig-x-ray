@@ -11,9 +11,8 @@ import XrayPhotoLoader from "../Skeletons/XrayPhotoLoader";
 import {nextPhoto, prevPhoto} from "../../redux/slices/photo/photoSlice";
 import XrayIcon from "../XrayIcon/XrayIcon";
 import ContrastPopup from "../ContrastPopup/ContrastPopup";
-import Ruler from "../Ruler/Ruler";
 import PanImage from "../PanImage/PanImage";
-import RulerTest from "../rulerTest/RulerTest";
+import Ruler from "../Ruler/Ruler";
 
 type PopupClick = MouseEvent & {
     path: Node[];
@@ -42,6 +41,7 @@ const XrayPhoto: FC = () => {
     const wrapperRef = useRef<HTMLDivElement>(null);
     const buttonRef = useRef<HTMLDivElement>(null);
     const photoRef = useRef<HTMLDivElement>(null);
+
 
     const dispatch = useDispatch<AppDispatch>();
 
@@ -82,6 +82,8 @@ const XrayPhoto: FC = () => {
         return () => document.body.removeEventListener('click', handleClickOutside);
     }, []);
 
+
+
     return (
         <div className={styles.xrayPhoto}>
             <div className={styles.xrayPhotoButtons}>
@@ -93,9 +95,7 @@ const XrayPhoto: FC = () => {
                               handleStatus={setArrowPopupStatus}/>
                     <XrayIcon url={LungIcon} alt={'Lung'} status={isAi} handleStatus={setIsAi}/>
                     <div onClick={() => {
-                        if (!rulerStatus) {
-                            window.scroll(0, 260)
-                        }
+                        window.scroll(0, 265)
                     }}>
                         <XrayIcon url={RulerIcon} alt={'Ruler'} status={rulerStatus} handleStatus={setRulerStatus}/>
                     </div>
@@ -117,13 +117,13 @@ const XrayPhoto: FC = () => {
                     status === 'loading' ? <XrayPhotoLoader/> : <div className={styles.xrayPhotoImage}
                                                                      ref={photoRef}>
                         {
-                            rulerStatus && <RulerTest />
+                            rulerStatus && <Ruler />
                         }
                         {
                             arrowPopupStatus ? <PanImage imgSrc={currentPhoto}
                                                          brightness={brightnessValue}
                                                          contrast={contrastValue}
-                                                         invert={invertValue}/>:
+                                                         invert={invertValue}/> :
                                 <img src={currentPhoto} alt={'x-ray'} style={
                                     {
                                         maxWidth: '100%',
