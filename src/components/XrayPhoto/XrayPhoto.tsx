@@ -95,7 +95,9 @@ const XrayPhoto: FC = () => {
                               handleStatus={setArrowPopupStatus}/>
                     <XrayIcon url={LungIcon} alt={'Lung'} status={isAi} handleStatus={setIsAi}/>
                     <div onClick={() => {
-                        window.scroll(0, 265)
+                        if (!rulerStatus) {
+                            window.scroll(0, 265)
+                        }
                     }}>
                         <XrayIcon url={RulerIcon} alt={'Ruler'} status={rulerStatus} handleStatus={setRulerStatus}/>
                     </div>

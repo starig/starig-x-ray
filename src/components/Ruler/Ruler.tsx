@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useRef, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import styles from './Ruler.module.scss';
 import {AiOutlineLeft, AiOutlineRight} from "react-icons/ai";
 import useMousePosition from "../../snippets/Snippets";
@@ -6,10 +6,6 @@ import useMousePosition from "../../snippets/Snippets";
 interface points {
     x: number,
     y: number,
-}
-
-type RulerType = {
-    mousePosition: points
 }
 
 const Ruler: FC = () => {
@@ -60,7 +56,7 @@ const Ruler: FC = () => {
         if (rulerPoint1 && !rulerPoint2) {
             if (x >= from.x) {
                 setTo({x, y});
-            } else if (x < from.x) {
+            } else if (x <= from.x) {
                 setTo(from);
                 setRulerPoint2(true);
                 setRulerPoint1(false);
@@ -68,7 +64,7 @@ const Ruler: FC = () => {
         } else if (rulerPoint2 && !rulerPoint1) {
             if (x <= to.x) {
                 setFrom({x, y});
-            } else if (x > to.x) {
+            } else if (x >= to.x) {
                 setFrom(to);
                 setRulerPoint1(true);
                 setRulerPoint2(false);
